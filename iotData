@@ -1,0 +1,28 @@
+pragma solidity ^0.8.0;
+
+contract StoreIOTData {
+    struct DataItems {
+        string clientID;
+        string temp;
+        string humi;
+        string dateTime;
+    }
+    mapping(string => DataItems[]) public hmtm;
+    function getItem(string memory cID)
+        public
+        view
+        returns (DataItems[] memory)
+    {
+        return hmtm[cID];
+    }
+    function addData(
+        string memory cid,
+        string memory temp,
+        string memory humi,
+        string memory dateTime
+    ) public {
+        DataItems memory addtrans = DataItems(cid, temp, humi, dateTime);
+
+        hmtm[cid].push(addtrans);
+    }
+}
